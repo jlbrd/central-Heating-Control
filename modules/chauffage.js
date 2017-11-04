@@ -1,4 +1,4 @@
-app.controller("chauffage", function ($scope, $http, $interval) {
+app.controller("chauffage", function ($scope, $http, $interval, Weather) {
 	$scope.absent = false;
 	$scope.horsgel = false;
 	$scope.priceSlider = 150;
@@ -18,12 +18,12 @@ app.controller("chauffage", function ($scope, $http, $interval) {
 	};
 	releve();
 	tempConsigne();
-	meteo();
+	weather();
 
 	$interval(function () {
 		releve();
 		tempConsigne();
-		meteo();
+		weather();
 	}, 60000);
 
 	$scope.absentChange = function () {
@@ -156,17 +156,10 @@ app.controller("chauffage", function ($scope, $http, $interval) {
 			);
 	}
 
-	function meteo() {
-		var urlOpenweathermap = "http://api.openweathermap.org/data/2.5/weather?q=XXX,fr&appid=APPID&lang=fr&units=metric";
-		$http.get(urlOpenweathermap)
-			.then(function (response) {
-				var _meteo = response.data;
-				$scope.tempExterieure = _meteo.main.temp;
-				$scope.tempExterieureLogo = _meteo.weather[0].icon;
-				$scope.tempExterieureDescription = _meteo.weather[0].description;
-
-			}
-			);
+	function weather() {
+		Weather.getCurrentWeather().then(function (response) {
+			$scope.weather = response;
+		});
 	}
 
 	function localToUTC(local) {

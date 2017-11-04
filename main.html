@@ -5,8 +5,8 @@
   <div class="col-sm-1 meteo">
     <div data-ng-show="relai==1"><img src="images/heating.png" height="64" width="64"></div>
   </div>
-  <div class="col-sm-8 meteo"><img data-ng-src="http://openweathermap.org/img/w/{{tempExterieureLogo}}.png" height="64" width="64"> {{tempExterieure
-    | number:1}} {{tempExterieureDescription}}
+  <div class="col-sm-8 meteo"><img data-ng-src="http://openweathermap.org/img/w/{{weather.icon}}.png" height="64" width="64"> {{weather.temp
+    | number:1}} {{weather.description}}
   </div>
   <div class="col-sm-1 meteo">
     <a data-ui-sref="configuration" data-ng-show="{{desktop === undefined}}"><img src="images/settings.png" height="64" width="64"></a>
