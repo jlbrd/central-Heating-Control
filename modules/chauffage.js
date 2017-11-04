@@ -1,4 +1,4 @@
-app.controller("chauffage", function ($scope, $http, $interval, Weather) {
+app.controller("chauffage", function ($scope, $http, $interval, weatherservice) {
 	$scope.absent = false;
 	$scope.horsgel = false;
 	$scope.priceSlider = 150;
@@ -157,7 +157,7 @@ app.controller("chauffage", function ($scope, $http, $interval, Weather) {
 	}
 
 	function weather() {
-		Weather.getCurrentWeather().then(function (response) {
+		weatherservice.getCurrentWeather().then(function (response) {
 			$scope.weather = response;
 		});
 	}
