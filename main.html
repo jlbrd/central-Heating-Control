@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-sm-1 meteo">
+    <div data-ng-show="alert==1"><img src="images/alert.png" height="64" width="64"></div>
+  </div>
+  <div class="col-sm-1 meteo">
+    <div data-ng-show="relai==1"><img src="images/heating.png" height="64" width="64"></div>
+  </div>
+  <div class="col-sm-8 meteo"><img data-ng-src="http://openweathermap.org/img/w/{{tempExterieureLogo}}.png" height="64" width="64"> {{tempExterieure
+    | number:1}} {{tempExterieureDescription}}
+  </div>
+  <div class="col-sm-1 meteo">
+    <a data-ui-sref="configuration" data-ng-show="{{desktop === undefined}}"><img src="images/settings.png" height="64" width="64"></a>
+  </div>
+  <div class="col-sm-1 meteo">
+    <a data-ui-sref="graphique" data-ng-show="{{desktop === undefined}}"><img src="images/chart.png" height="64" width="64"></a>
+  </div>
+</div>
+
+
+<div class="row" data-ng-click="changeConsigne('MANUELLE', +0.5)">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 modifTemp" id="rcornerHaut">+</div>
+  <div class="col-sm-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 t1 fondvert">
+    <div class="tempActuelle">
+      <div class="tempActuelle1">{{tempConsigne | partieNombre:1 }}</div>
+      <div class="tempActuelle2">{{tempConsigne | partieNombre:2 }}</div>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 t1 fondvert">
+    <div class="tempActuelle">
+      <div class="tempActuelle1">{{tempActuelle | partieNombre:1 }}</div>
+      <div class="tempActuelle2">{{tempActuelle | partieNombre:2 }}</div>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
+
+<div class="row" data-ng-click="changeConsigne('MANUELLE', -0.5)">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 modifTemp" id="rcornerBas">-</div>
+  <div class="col-sm-2"></div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-2"></div>
+</div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="col-sm-8 status">Absent</div>
+    <div class="col-sm-2">
+      <input id="absent" class="cmn-toggle cmn-toggle-round" data-ng-change="absentChange()" ng-model="absent" type="checkbox">
+      <label for="absent"></label>
+    </div>
+  </div>
+  <div class="col-sm-2">
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2 status"></div>
+  <div class="col-sm-8">
+    <div class="col-sm-8 status">Hors-gel</div>
+    <div class="col-sm-2">
+      <input id="cmn-toggle-horsgel" class="cmn-toggle cmn-toggle-round" ng-model="horsgel" data-ng-change="horsgelChange()" type="checkbox">
+      <label for="cmn-toggle-horsgel"></label>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1 status">&nbsp;</div>
+</div>
+
+
+<data-ng-include src=" 'consigne.html' "></data-ng-include>

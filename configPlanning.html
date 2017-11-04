@@ -1,0 +1,38 @@
+<p>
+		<a data-ui-sref="configTempConsigne">Modifier les températures de consignes</a>
+</p>
+
+<div id="tabs">
+	<ul>
+		<li ng-repeat="tab in menuJours" ng-class="{active:tab.id == jour}" ng-click="planning(tab.id);">{{tab.name}}</li>
+	</ul>
+	<div id="mainView">
+		<fieldset data-ng-repeat="slider in tabSliders">
+			<div class="row">
+				<div class="col-sm-8">
+					<rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options"></rzslider>
+				</div>
+				<div class="col-sm-4">
+					<div class="col-sm-2 combotemp">
+						<select class="height32" id="temp" name="temp" data-ng-model="slider.options.temperature_id">
+						<option data-ng-repeat="t in temperatures" value="{{t.id}}">{{t.libelle}} {{t.valeur}}°</option>
+					</select>
+					</div>
+					<div class="col-sm-2" ng-click="ajoutePlage(slider.options.planning_id)"><img src="images/plus.png" height="32" width="32"></div>
+					<div class="col-sm-2" ng-click="supprimePlage(slider.options.planning_id)" ng-show="slider.options.planning_id != 0"><img src="images/moins.png" height="32" width="32"></div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div class="row">&nbsp;</div>
+<div class="row">
+	<div class="col-sm-1"></div>
+	<div class="col-sm-1">
+		<button class="boutonvalidation" ng-click="valider()">OK</button>
+	</div>
+	<div class="col-sm-1">
+		<a data-ui-sref="chauffage" ui-sref-active="active"><button class="boutonvalidation">Annuler</button></a>
+	</div>
+</div>

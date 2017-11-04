@@ -1,0 +1,32 @@
+<h2>Températures de consigne</h2>
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-6">
+        <form name="userForm">
+            <table border="1">
+                <tr ng-repeat="temperature in temperatures">
+                    <td>{{temperature.libelle}}</td>
+                    <td>
+                        <input type="number" class="form-control" name="myDecimal" placeholder="Decimal" ng-model="temperature.valeur" min="0" max="25"
+                            ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.1" required />
+                        <!--<input ng-model="temperature.valeur">-->
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <span class="help-block" ng-show="!userForm.myDecimal.$valid">
+                La saisie est invalide!
+            </span> </div>
+</div>
+
+<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-1">
+        <button class="boutonvalidation" ng-click="valider()" ng-disabled="!userForm.myDecimal.$valid">OK</button>
+    </div>
+    <div class="col-sm-1">
+        <a data-ui-sref="chauffage" ui-sref-active="active"><button class="boutonvalidation">Annuler</button></a>
+    </div>
+</div>

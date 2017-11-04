@@ -1,0 +1,89 @@
+div {
+ border-width:0px;
+ border-style:dotted;
+ border-color:black;
+ }
+
+.t1 {
+     ppadding: 30px;
+     text-align: center;
+}
+
+.tempActuelle {
+	text-align: center;
+	display: inline-block;
+	background: #BFBFBF;
+}
+
+.tempActuelle1 {
+	font-family: "Times New Roman", Georgia, Serif;
+    font-size: 1250%;
+    text-align: center;
+	position: relative;
+	float: left;
+	
+}
+
+.tempActuelle2 {
+	font-family: "Times New Roman", Georgia, Serif;
+    font-size: 750%;
+    text-align: center;
+    position: relative;
+    float: left;
+    
+}
+
+.status {
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 300%;
+}
+.modifTemp {
+	font-family: "Times New Roman", Georgia, Serif;
+    font-size: 650%;
+    text-align: center;
+    position: relative;
+    float: left;
+    color: orange;
+    font-weight: bold;
+}
+
+.meteo {
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 300%;
+	text-align: center;
+}
+
+#rcornerHaut {
+    border-top-left-radius: 90px;
+	border-top-right-radius: 90px;
+    background: #57b0c1;
+    padding: 20px;
+}
+
+#rcornerBas {
+    border-bottom-left-radius: 90px;
+	border-bottom-right-radius: 90px;
+    background: #57b0c1;
+    padding: 20px;
+}
+
+.fondvert {
+    background: #57b0c1;
+}
+
+.height32 {
+    height: 32px;
+}
+
+.boutonvalidation {
+    width: 100px;
+    height: 50px;
+    padding: 5px;
+    color: black;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.combotemp {
+    margin-right: 80px;
+}

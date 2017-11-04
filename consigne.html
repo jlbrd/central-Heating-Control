@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="col-sm-10 status">
+		{{libelleConsigne}}<span ng-show="modeConsigne!='ABSENT' && modeConsigne!='HORSGEL'"> jusqu'à {{heureFinConsigne | date : "HH:mm" }}</span>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-1 status">&nbsp;</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-1 status">
+
+		<div ng-show=showSliderConsigneManuelle>
+			<img ng-src="images/cancel.png" height="64" width="64" alt="Configuration" ng-click="annuleConsigneManuelle()" ng-show="1==1">
+		</div>
+	</div>
+
+	<div class="col-sm-11 status" ng-show=showSliderConsigneManuelle>
+
+		<rzslider rz-slider-model="tempsConsigneManuelle.value" rz-slider-high="tempsConsigneManuelle.max" rz-slider-options="tempsConsigneManuelle.options">
+
+		</rzslider>
+	</div>
+
+</div>
