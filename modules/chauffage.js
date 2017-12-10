@@ -88,6 +88,7 @@ app.controller("chauffage", function ($scope, $http, $interval, weatherservice) 
 		$http.get("php/releve.php")
 			.then(function (response) {
 				$scope.tempActuelle = parseFloat(response.data.valeur.trim());
+				$scope.exterieur = parseFloat(response.data.exterieur.trim());
 				dateMajReleve(response.data.dateCreation);
 				$scope.relai = response.data.relai;
 			}

@@ -26,6 +26,8 @@ SELECT
 FROM_UNIXTIME(FLOOR( UNIX_TIMESTAMP(dateCreation)/$secondes ) * $secondes) AS dateCreation
 , AVG(valeur) AS valeur
 , AVG(exterieur) AS exterieur
+, AVG(wunderground) AS wunderground
+, AVG(openweathermap) AS openweathermap
 , AVG(relai) AS relai
 , AVG(consigne) AS consigne
 FROM releve 

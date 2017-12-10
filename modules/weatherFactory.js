@@ -2,7 +2,7 @@ angular
     .module('chauffage')
     .factory('weatherservice', weatherservice);
 
-    weatherservice.$inject = ['$http'];
+weatherservice.$inject = ['$http'];
 
 function weatherservice($http) {
     return {
@@ -10,9 +10,9 @@ function weatherservice($http) {
     };
 
     function getCurrentWeather() {
-        var urlOpenweathermap = ""; // Enter here the api.openweathermap.org URL
-        var urlWunderground = ""; // Enter here the api.wunderground.com URL
-        var urlWeather = urlWunderground;
+        var urlOpenweathermap = "http://api.openweathermap.org/data/2.5/weather?q=saran,fr&appid=6b0983d0c55676e15f32d1e491394e86&lang=fr&units=metric";
+        var urlWunderground = "http://api.wunderground.com/api/d1214dcc64f75d9d/lang:FR/conditions/q/pws:ISARAN10.json";
+        var urlWeather = urlOpenweathermap;
         return $http.get(urlWeather)
             .then(getCurrentWeatherComplete)
             .catch(getCurrentWeatherFailed);

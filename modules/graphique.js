@@ -1,8 +1,14 @@
-app.controller("Graphique", function ($scope, $http, $location, $filter) {
+app.controller("Graphique", function ($scope, $http, $location, $filter, chartservice) {
     $scope.dateDebut = new Date();
     $scope.dateFin = new Date();
 
-    $scope.myChartObject = {
+    $scope.piechartObject = {};
+    $scope.piechartObject.type = "PieChart";
+    $scope.piechartObject.options = {
+        is3D: true,
+        width: 600
+    }
+    $scope.areaChartObject = {
         "type": "AreaChart",
         "displayed": false,
         "data": {
@@ -19,6 +25,18 @@ app.controller("Graphique", function ($scope, $http, $location, $filter) {
                     "type": "number",
                     "p": {}
                 },
+                /*{
+                    "id": "wunderground",
+                    "label": "wunderground",
+                    "type": "number",
+                    "p": {}
+                },
+                {
+                    "id": "openweathermap",
+                    "label": "openweathermap",
+                    "type": "number",
+                    "p": {}
+                },*/
                 {
                     "id": "int",
                     "label": "Intérieur",
@@ -38,8 +56,23 @@ app.controller("Graphique", function ($scope, $http, $location, $filter) {
         "formatters": {}
     };
 
-    $scope.graphe = function () {
-        //var today = $filter('date')(new Date(), "yyyyMMdd");
+    $scope.areaChartObject.options = {
+        displayAnnotations: true,
+        legend: { position: 'top', textStyle: { fontSize: 16 } },
+        "height": 600,
+        //width: '100%',
+        "titlePosition": 'none',
+        "vAxis": {
+            //"title": "Température",
+            "gridlines": {
+                "count": 20
+            }
+        }
+    };
+
+    function areaChart() {
+        var dateDebut = $filter('date')($scope.dateDebut, "yyyyMMdd");
+        var dateFin = $filter('date')($scope.dateFin, "yyyyMMdd");
         var intervalEnMinute = 60;
         var timeDiff = Math.abs($scope.dateDebut.getTime() - $scope.dateFin.getTime());
         var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -47,17 +80,12 @@ app.controller("Graphique", function ($scope, $http, $location, $filter) {
         if (diffDays <= 2) {
             intervalEnMinute = 5;
         }
-        $http({
-            method: 'GET',
-            url: 'php/releveperiode.php',
-            params: {
-                dateDebut: $filter('date')($scope.dateDebut, "yyyyMMdd"),
-                dateFin: $filter('date')($scope.dateFin, "yyyyMMdd"),
-                intervalEnMinute: intervalEnMinute
-            }
-        }).then(function successCallback(response) {
-            $scope.myChartObject.data.rows = [];
-            response.data.forEach(function (entry) {
+        chartservice.getData(dateDebut, dateFin, intervalEnMinute).then(function (response) {
+            if (response.length == 0) {
+                return;
+            };
+            $scope.areaChartObject.data.rows = [];
+            response.forEach(function (entry) {
                 var dateCreation = $filter('date')(new Date(entry.dateCreation), "HH:mm");
                 if (dateCreation == "00:00") {
                     dateCreation = $filter('date')(new Date(entry.dateCreation), "dd/MM");
@@ -68,6 +96,10 @@ app.controller("Graphique", function ($scope, $http, $location, $filter) {
                             "v": dateCreation
                         }, {
                             "v": entry.exterieur
+                            /*}, {
+                                "v": entry.wunderground
+                            }, {
+                                "v": entry.openweathermap*/
                         }, {
                             "v": entry.valeur
                         }, {
@@ -75,31 +107,55 @@ app.controller("Graphique", function ($scope, $http, $location, $filter) {
                         }
                     ]
                 };
-                $scope.myChartObject.data.rows.push(data);
+                $scope.areaChartObject.data.rows.push(data);
             });
-            $scope.myChartObject.options = {
-                displayAnnotations: true,
-                legend: {position: 'top', textStyle: {fontSize: 16}},
-                "height": 600,
-                //width: '100%',
-                "titlePosition": 'none',
-                "vAxis": {
-                    //"title": "Température",
-                    "gridlines": {
-                        "count": 20
-                    }
-                }
-            };
         }, function errorCallback(response) {
         });
     };
+
+    function relayState() {
+
+        var dateDebut = $filter('date')($scope.dateDebut, "yyyyMMdd");
+        var dateFin = $filter('date')($scope.dateFin, "yyyyMMdd");
+        chartservice.getRelayState(dateDebut, dateFin).then(function (response) {
+            if (response.length == 0) {
+                return;
+            };
+            $scope.piechartObject.data = {
+                "cols": [
+                    { id: "t", label: "Topping", type: "string" },
+                    { id: "s", label: "Slices", type: "number" }
+                ], "rows": [
+                    {
+                        c: [
+                            { v: "En marche" },
+                            { v: parseInt(response[1].nbre) },
+                        ]
+                    },
+                    {
+                        c: [
+                            { v: "Arrêté" },
+                            { v: parseInt(response[0].nbre) }
+                        ]
+                    },
+                ]
+            };
+
+        });
+    }
+
+
+    $scope.graphe = function () {
+        areaChart();
+        relayState();
+    }
 
     $scope.graphe();
 
 });
 
 app.config(function ($mdDateLocaleProvider) {
-    $mdDateLocaleProvider.shortMonths = ['janv', 'févr', 'mars', 'avri', 'mai', 'juin', 'juil', 'août', 'sept', 'octo', 'nove', 'déce'];
+    $mdDateLocaleProvider.shortMonths = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
     $mdDateLocaleProvider.formatDate = function (date) {
 
         var day = date.getDate();
