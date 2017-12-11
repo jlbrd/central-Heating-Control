@@ -67,14 +67,13 @@ app.controller("Config", function ($scope, $http, $interval, $state) {
 
 
 	function length(obj) {
-		var i = 0;
-		for (var p in obj) i++;
-		return i;
+		return Object.keys(obj).length;
 	}
+
 	$scope.supprimePlage = function (id) {
-		nouvTabSliders = {};
+		var nouvTabSliders = {};
 		var num = 0;
-		for (i = 0; i < length($scope.tabSliders); i++) {
+		for (var i = 0; i < length($scope.tabSliders); i++) {
 			if ($scope.tabSliders[i].options.planning_id != id) {
 				nouvTabSliders[num] = $scope.tabSliders[i];
 				nouvTabSliders[num].options.planning_id = num;
@@ -96,10 +95,8 @@ app.controller("Config", function ($scope, $http, $interval, $state) {
 		nouveau.minValue = sliderActuel.minValue + ((sliderActuel.maxValue - sliderActuel.minValue) / 2);
 		nouveau.maxValue = sliderActuel.maxValue;
 		sliderActuel.maxValue = nouveau.minValue;
-		var element = { nouvId: nouveau };
-		//$scope.tabSliders[nouvId] = nouveau;
-		nouvTabSliders = {};
-		for (i = 0; i <= id; i++) {
+		var nouvTabSliders = {};
+		for (var i = 0; i <= id; i++) {
 			if ($scope.tabSliders[i] != null) {
 				nouvTabSliders[i] = $scope.tabSliders[i];
 			}
@@ -115,11 +112,11 @@ app.controller("Config", function ($scope, $http, $interval, $state) {
 		if (Object.keys($scope.tabSliders).length > 0) {
 			$scope.tabSlidersCache[$scope.jour] = $scope.tabSliders;
 		}
-		for (jour = 1; jour < 8; jour++) {
+		for (var jour = 1; jour < 8; jour++) {
 			if ($scope.tabSlidersCache[jour] != null) {
 				$http.post('php/majPlanning.php', $scope.tabSlidersCache[jour])
 					.then(function (data, status, headers, config) {
-						var i = 0;
+						
 					})
 					.catch(function (data, status, headers, config) {
 						console.log('error');

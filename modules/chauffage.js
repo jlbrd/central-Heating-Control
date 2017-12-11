@@ -66,7 +66,7 @@ app.controller("chauffage", function ($scope, $http, $interval, weatherservice) 
 		if (valeur == null) {
 			valeur = 0;
 		}
-		data = {
+		var data = {
 			'valeur': $scope.tempConsigne + valeur
 			, 'type': type
 			, 'duree': duree
@@ -161,26 +161,6 @@ app.controller("chauffage", function ($scope, $http, $interval, weatherservice) 
 		weatherservice.getCurrentWeather().then(function (response) {
 			$scope.weather = response;
 		});
-	}
-
-	function localToUTC(local) {
-		var date = new Date(local);
-		var localOffset = date.getTimezoneOffset() * 60000;
-		var localTime = date.getTime();
-		date = localTime + localOffset;
-		date = new Date(date);
-		console.log("localToUTC Local " + local + "UTC: " + date);
-		return date;
-	}
-
-	function utcToLocal(utc) {
-		var date = new Date(utc);
-		var localOffset = date.getTimezoneOffset() * 60000;
-		var localTime = date.getTime();
-		date = localTime - localOffset;
-		date = new Date(date);
-		console.log("utcToLocal UTC :" + utc + " Local: " + date);
-		return date;
 	}
 
 });

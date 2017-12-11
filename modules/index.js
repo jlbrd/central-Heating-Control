@@ -96,7 +96,6 @@ app.filter('partieNombre', function () {
 			return '';
 		}
 		var _temp = nombre.toString().trim();
-		var _tempActuelle = parseFloat(_temp);
 		var _tempActuelle1 = parseInt(_temp);
 		var _tempActuelle2 = 0;
 		if (_temp.indexOf(".") != -1) {

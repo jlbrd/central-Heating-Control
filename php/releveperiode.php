@@ -1,25 +1,20 @@
 <?php
 define("SECONDESPARHEURE", 3600);
 define("SECONDESPARMINUTE", 60);
-//define("HOST", "89.89.151.88");
 define("HOST", "localhost");
 $dateDebut = '20170610';
 $dateFin = '20170610';
 $intervalEnMinute = 60;
 if (isset($_GET['dateDebut'])) {
         $dateDebut = $_GET['dateDebut'];
-        //echo $dateDebut;
         $dateFin = $_GET['dateFin'];
         $intervalEnMinute = $_GET['intervalEnMinute'];
     }else{
         // Fallback behaviour goes here
     }
 
-	require("connectDB.php");
+    require("connectDB.php");
     
-//$intervalEnHeure = 1;
-//$seconde = 3600; // 1 heure
-//$secondes = SECONDESPARHEURE * $intervalEnHeure; 
 $secondes = SECONDESPARMINUTE * $intervalEnMinute;
 $sql = "
 SELECT 
@@ -42,10 +37,5 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 echo json_encode($rows);
 
-/*
-$fp = fopen('c:\sql.log', 'w');
-fwrite($fp, $sql);
-fclose($fp);
-*/
-?>
+?>    
 

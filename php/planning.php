@@ -1,5 +1,5 @@
 <?php
-	require("connectDB.php");
+    require("connectDB.php");
     
 
 $sql = "SELECT id, jour, heureDebut, heureFin, temperature_id FROM planning order by jour, heureDebut";

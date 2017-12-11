@@ -3,7 +3,7 @@ app.controller("ConfigTempConsigne", function ($scope, $http, $interval, $state)
         $http.get("php/temperatures.php")
             .then(function (response) {
                 $scope.temperatures = response.data;
-                for(i=0; i<$scope.temperatures.length; i++) {
+                for(var i=0; i<$scope.temperatures.length; i++) {
                     $scope.temperatures[ i ].valeur = parseFloat( $scope.temperatures[ i ].valeur )
                 }
             }

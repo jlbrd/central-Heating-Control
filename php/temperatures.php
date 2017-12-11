@@ -1,5 +1,5 @@
 <?php
-	require("connectDB.php");
+    require("connectDB.php");
     
 
 $sql = "SELECT id, menu, couleur, valeur, libelle FROM temperature";

@@ -1,5 +1,5 @@
 <?php
-	require("connectDB.php");
+    require("connectDB.php");
     
 
 $sql = "SELECT dateCreation, valeur, exterieur, relai FROM releve ORDER BY dateCreation DESC LIMIT 1";

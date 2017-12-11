@@ -1,11 +1,10 @@
 <?php
-	require("connectDB.php");
+    require("connectDB.php");
     
     $dateDebut = '20170610';
     $dateFin = '20170610';
     if (isset($_GET['dateDebut'])) {
         $dateDebut = $_GET['dateDebut'];
-        //echo $dateDebut;
         $dateFin = $_GET['dateFin'];
     } else{
         // Fallback behaviour goes here
