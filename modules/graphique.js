@@ -129,13 +129,13 @@ app.controller("Graphique", function ($scope, $http, $location, $filter, chartse
                     {
                         c: [
                             { v: "En marche" },
-                            { v: parseInt(response[1].nbre) },
+                            { v: parseInt(response[1] == null ? 0 : response[1].nbre) },
                         ]
                     },
                     {
                         c: [
                             { v: "Arrêté" },
-                            { v: parseInt(response[0].nbre) }
+                            { v: parseInt(response[0] == null ? 0 : response[0].nbre) }
                         ]
                     },
                 ]
@@ -146,8 +146,10 @@ app.controller("Graphique", function ($scope, $http, $location, $filter, chartse
 
 
     $scope.graphe = function () {
+        $scope.chargement = true;
         areaChart();
         relayState();
+        $scope.chargement = false;
     }
 
     $scope.graphe();

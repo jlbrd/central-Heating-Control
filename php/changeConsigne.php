@@ -12,7 +12,7 @@
     ON DUPLICATE KEY UPDATE id = VALUES(id), type = VALUES(type), valeur = VALUES(valeur), duree = VALUES(duree), debutEffet = VALUES(debutEffet)";
     
     $result = $link->query($sql)
-        || die(mysql_error());
+        or die(mysql_error());
 
     mysqli_close($link);
 

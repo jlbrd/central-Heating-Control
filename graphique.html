@@ -1,11 +1,13 @@
-<div layout-gt-xs="row">
+<div class="row">
     <div flex-gt-xs>
         <md-datepicker ng-model="dateDebut" md-placeholder="Date de début"></md-datepicker>
         <md-datepicker ng-model="dateFin" md-placeholder="Date de fin"></md-datepicker>
         <md-button class="md-raised md-primary" data-ng-click="graphe()">Recharger</md-button>
     </div>
-    <div flex-gt-xs>
-    </div>
+</div>
+
+<div layout="row" layout-sm="column" layout-align="space-around" data-ng-show="{{chargement}}">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 <div google-chart chart="areaChartObject" style="{{cssStyle}}"></div>
 <div google-chart chart="piechartObject" style="{{cssStyle}}"></div>
@@ -13,8 +15,8 @@
 <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-1">
-        <a data-ui-sref="chauffage" data-ng-show="{{desktop === undefined}}" ui-sref-active="active"><button class="boutonvalidation">Retour</button></a>
+        <a data-ui-sref="chauffage" data-ng-show="{{desktop === undefined}}" ui-sref-active="active">
+            <button class="boutonvalidation">Retour</button>
+        </a>
     </div>
 </div>
-
-
